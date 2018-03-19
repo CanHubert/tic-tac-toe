@@ -11,7 +11,7 @@ import java.util.*;
 public class Controller implements Initializable {
     public GridPane boxes;
     public Button buttonO,buttonX, button1, button2,button3, button4, button5, button6, button7, button8, button9;
-    public Label label;
+    public Label label, playerMarkLabel;
     private String mark, markAI;
     private boolean endGame = false;
     private boolean myTurn = true;
@@ -55,9 +55,9 @@ public class Controller implements Initializable {
 
     public void markBox(ActionEvent ae){
         Button btn = (Button) ae.getSource();
+        if(!btn.getText().equals("")) return;
         int buttonKey = Integer.valueOf(btn.getId().substring(6));
         btn.setText(mark);
-        btn.setDisable(true);
         winningConditions();
         buttonsMap.remove(buttonKey);
         myTurn= false;
@@ -68,6 +68,7 @@ public class Controller implements Initializable {
         mark = ((Button)ae.getSource()).getText();
         if(mark.equals("O")) markAI = "X";
         else markAI= "O";
+        playerMarkLabel.setText(mark);
         buttonO.setDisable(true);
         buttonX.setDisable(true);
         unlockButtons();
@@ -83,6 +84,7 @@ public class Controller implements Initializable {
     public void restartGame(){
         fillMap();
         label.setText("NEW GAME");
+        playerMarkLabel.setText("");
         buttonO.setDisable(false);
         buttonX.setDisable(false);
         endGame= false;
@@ -119,7 +121,6 @@ public class Controller implements Initializable {
         int rand = new Random().nextInt(9)+1;
         try{
             buttonsMap.get(rand).setText(markAI);
-            buttonsMap.get(rand).setDisable(true);
             winningConditions();
             buttonsMap.remove(rand);
         }catch (NullPointerException e){

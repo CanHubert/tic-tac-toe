@@ -39,6 +39,7 @@
                </HBox.margin>
             </Button>
             <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="playerMarkLabel" prefHeight="31.0" prefWidth="44.0" />
             <Label fx:id="label" alignment="CENTER" prefHeight="31.0" prefWidth="141.0" text="Label" />
             <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="buttonX" mnemonicParsing="false" onAction="#chooseMark" text="X" />
